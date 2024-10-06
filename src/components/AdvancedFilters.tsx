@@ -11,12 +11,12 @@ import {
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
-import { useAlert } from '@/contexts/AlertContext';
 import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
 import { Slider } from "@/components/ui/slider"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
+import GrainedB from '@/lib/grained-a.png'
 
 export default function AdvancedFilters({ onApplyFilters }: { readonly onApplyFilters: (queryString: string) => void }) {
     const [filterType, setFilterType] = useState('')
@@ -36,8 +36,6 @@ export default function AdvancedFilters({ onApplyFilters }: { readonly onApplyFi
     })
 
     const [showAlert, setShowAlert] = useState(false);
-    const { showAlertWorkInProgress } = useAlert();
-
     const buildQueryString = () => {
         const params = new URLSearchParams()
         if (filterType) params.append('filterType', filterType)
@@ -73,16 +71,22 @@ export default function AdvancedFilters({ onApplyFilters }: { readonly onApplyFi
 
     const handleFilterTypeChange = (value: string) => {
         setFilterType(value);
-
-        // Check if the selected filter type is 'merchants' or 'category'
-        if (value === "merchants" || value === "category") {
-            alert("Feature not available yet.");
-        }
     };
 
     return (
-        <div className="w-[50%] flex justify-items-start items-center ml-[20px]">
-            <Card className="w-[400px] overflow-y-auto bg-gradient-to-b from-background to-secondary/10">
+        <div
+            className="hidden xl:block w-[400px] px-10 lg:px-0"
+            style={{
+                backdropFilter: 'blur(10px)',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                backgroundImage: `url(${GrainedB.src}), linear-gradient(175deg, rgba(255,255,255,0.1) 45%, rgba(240,240,240,0.8))`,
+                backgroundBlendMode: 'overlay',
+                minWidth: '500px',
+                position: 'relative',
+                overflow: 'hidden'
+            }}
+        >
+            <Card className="bg-gradient-to-b from-background to-secondary/10">
                 <CardHeader className="pb-2">
                     <CardTitle className="text-xl font-bold">Advanced Filters</CardTitle>
                 </CardHeader>
@@ -126,7 +130,7 @@ export default function AdvancedFilters({ onApplyFilters }: { readonly onApplyFi
                                     id="top-number-input"
                                     value={topNumber}
                                     onChange={(e) => setTopNumber(Number(e.target.value))}
-                                    className="w-12 h-8 text-center text-xs"
+                                    className="w-14 h-8 text-center text-xs"
                                     min={0}
                                     max={100}
                                 />
@@ -275,7 +279,6 @@ export default function AdvancedFilters({ onApplyFilters }: { readonly onApplyFi
                             </div>
                         </div>
                     </div>
-
                     <Button className="w-full h-8 mt-2 text-sm" onClick={handleApplyFilters}>Apply Filters</Button>
                 </CardContent>
             </Card>

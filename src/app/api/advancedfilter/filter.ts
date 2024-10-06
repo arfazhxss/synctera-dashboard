@@ -38,7 +38,7 @@ function filterTopMerchants(transactions: Transaction[], topN: number = 10): Tra
             acc[merchantName] = {
                 count: 0,
                 categories: new Set<string>(),
-                dates: [] as string[], // Add a dates array to track transaction dates
+                dates: [] as string[],
             };
         }
 
@@ -55,7 +55,6 @@ function filterTopMerchants(transactions: Transaction[], topN: number = 10): Tra
         .slice(0, topN)
         .map(([merchant]) => merchant);
 
-    // Create a new array of modified transactions for top merchants
     const modifiedTransactions = new Map<string, Transaction>();
 
     // Filter and modify transactions for each top merchant
@@ -84,15 +83,15 @@ function filterTopMerchants(transactions: Transaction[], topN: number = 10): Tra
 }
 
 function filterTopAmount(transactions: Transaction[], topN: number = 10): Transaction[] {
-    return transactions
+    const sortedTransactions = transactions
         .toSorted((a, b) =>
             (b.debit ?? b.credit ?? 0) - (a.debit ?? a.credit ?? 0)
         )
         .slice(0, topN);
+    return sortedTransactions;
 }
 
 function filterTopCategories(transactions: Transaction[], topN: number = 10): Transaction[] {
-    // Step 1: Count how many times each category appears and track merchant names and transaction dates
     const categoryInfo = transactions.reduce((acc, transaction) => {
         const category = transaction.category;
         const merchant = transaction.description;
@@ -107,38 +106,30 @@ function filterTopCategories(transactions: Transaction[], topN: number = 10): Tr
 
         acc[category].count += 1;
         acc[category].merchants.add(merchant);
-        acc[category].dates.push(transaction.transactionDate); // Track the transaction dates
+        acc[category].dates.push(transaction.transactionDate);
 
         return acc;
     }, {} as Record<string, { count: number; merchants: Set<string>; dates: string[] }>);
 
-    // Step 2: Get the top N categories based on frequency
     const topCategories = Object.entries(categoryInfo)
         .sort(([, a], [, b]) => b.count - a.count)
         .slice(0, topN)
         .map(([category]) => category);
 
-    // Step 3: Create a new array of modified transactions for top categories
     const modifiedTransactions = new Map<string, Transaction>();
-
-    // Filter and modify transactions for each top category
     topCategories.forEach(category => {
         const categoryData = categoryInfo[category];
         const sortedDates = [...categoryData.dates].sort((a, b) => new Date(a).getTime() - new Date(b).getTime()); // Sort dates
-
-        // Format the date range
         const formattedDateRange = formatDateRange(sortedDates);
-
-        // Find the first transaction for this category to modify it
         const firstTransaction = transactions.find(t => t.category === category);
 
         if (firstTransaction) {
             modifiedTransactions.set(category, {
                 ...firstTransaction,
-                debit: null, // Set debit to null
-                credit: categoryData.count, // Set credit to the category's frequency
-                description: Array.from(categoryData.merchants).join(', '), // Join merchant names with commas
-                transactionDate: formattedDateRange, // Set the transactionDate to the formatted range
+                debit: null,
+                credit: categoryData.count,
+                description: Array.from(categoryData.merchants).join(', '),
+                transactionDate: formattedDateRange,
             });
         }
     });
@@ -173,15 +164,11 @@ function filterByYearRange(transactions: Transaction[], from?: number, to?: numb
 }
 
 function filterByCountry(transactions: Transaction[], country: string): Transaction[] {
-    return transactions.filter(t => t.country === country);
+    return transactions.filter(t => t.merchantCountry === country);
 }
 
 function filterByCity(transactions: Transaction[], city: string): Transaction[] {
-    return transactions.filter(t => t.city === city);
-}
-
-function filterByCategory(transactions: Transaction[], category: string): Transaction[] {
-    return transactions.filter(t => t.category === category);
+    return transactions.filter(t => t.merchantCity === city);
 }
 
 function filterBySearchId(transactions: Transaction[], searchId: string): Transaction[] {
@@ -193,6 +180,10 @@ function applyAdditionalFilters(transactions: Transaction[], options: FilterOpti
 
     if (options.currency) {
         filtered = filterByCurrency(filtered, options.currency);
+    }
+
+    if (options.amountMax || options.amountMin) {
+        filtered = filterByAmountRange(filtered, options.amountMin, options.amountMax);
     }
 
     if (options.transactionType && options.transactionType.length > 0) {
@@ -239,12 +230,10 @@ export function applyFilters(
             return [];
     }
 
-    // Check for invalid combinations of filters
     if (options.filterType !== 'amount' && (options.amountMin || options.amountMax)) {
         throw new Error('Bad data: amountMin and amountMax can only be used with "amount" filterType');
     }
 
-    // Apply additional filters to the already top-filtered results
     filtered = applyAdditionalFilters(filtered, options);
 
     return filtered;

@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
             transactionType: searchParams.getAll('transactionType'),
         };
 
-        // Apply filters in one pass
+        // Apply filters
         const filteredTransactions = applyFilters(transactions, filterOptions);
 
         return NextResponse.json(filteredTransactions);
