@@ -1,20 +1,4 @@
-# Synctera Front End Challenge - Implementation Overview
-
-## Completed Requirements
-
-### Task 1 ✅
-- Implemented transaction table with all data
-- Added loading indicator (LoadingContext & LoadingOverlay components)
-- Created TransactionDetailsDialog for viewing details in a modal
-- Used shadcn/ui components for a professional look
-
-### Task 2 ✅
-- Implemented advanced filters API endpoint (/api/advancedfilter)
-- Added dropdown filters for:
-  - Top 10 merchants
-  - Top 10 by amount
-  - Top categories by amount
-- Created FilterSelect component for filter UI
+# Synctera Banking System - Overview
 
 ## Technical Decisions
 
