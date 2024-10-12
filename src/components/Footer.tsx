@@ -4,7 +4,7 @@ import { Building2, Briefcase, Users, Scale, ShieldCheck, FileText, Cookie } fro
 
 export default function Footer() {
     return (
-        <footer className="bg-gray-900 text-white py-6 border-t border-gray-800">
+        <footer className="bg-gray-900 text-white py-6 border-t border-gray-800 mt-[-90px]">
             <div className="container mx-auto px-4">
                 <div className="flex flex-col sm:flex-row justify-between items-center mb-4">
                     <div className="flex items-center space-x-4 mb-4 sm:mb-0">

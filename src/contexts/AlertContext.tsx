@@ -14,14 +14,16 @@ export function AlertProvider({ children }: { readonly children: React.ReactNode
     const [isVisible, setIsVisible] = useState(false);
     const [alertContent, setAlertContent] = useState({ title: '', description: '' });
 
-    const showAlertWorkInProgress = (title: string, description: string) => {
+    const showAlertWorkInProgress = React.useCallback((title: string, description: string) => {
         setAlertContent({ title, description });
         setIsVisible(true);
         setTimeout(() => setIsVisible(false), 3000);
-    };
+    }, []);
+
+    const contextValue = React.useMemo(() => ({ showAlertWorkInProgress }), [showAlertWorkInProgress]);
 
     return (
-        <AlertContext.Provider value={{ showAlertWorkInProgress }}>
+        <AlertContext.Provider value={contextValue}>
             {children}
             {isVisible && (
                 <div className="fixed top-4 right-4 z-50">

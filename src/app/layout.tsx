@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
+// import { AlertProvider } from '@/contexts/AlertContext';
 import { LoadingProvider } from '@/contexts/LoadingContext';
-import { AlertProvider } from '@/contexts/AlertContext';
 import "./globals.css";
 
 const geistSans = localFont({
@@ -16,7 +18,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Synctera Frontend Test",
+  title: "Synctera Dashboard",
   description: "Developed by Arfaz Hussain",
 };
 
@@ -27,15 +29,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <AlertProvider>
-        <LoadingProvider>
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-          >
+      {/* <AlertProvider> */}
+      <LoadingProvider>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <div className="flex flex-col min-h-screen">
+            <Navbar />
             {children}
-          </body>
-        </LoadingProvider>
-      </AlertProvider>
+            <Footer />
+          </div>
+        </body>
+      </LoadingProvider>
+      {/* </AlertProvider> */}
     </html>
   );
 }

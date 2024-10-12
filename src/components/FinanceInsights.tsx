@@ -36,7 +36,7 @@ const spendingData = [
 
 export default function FinanceInsights() {
     return (
-        <Card className="w-full overflow-hidden p-4">
+        <Card className="w-full overflow-hidden p-4 mt-2">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <GrainedCard className="p-3 bg-gradient-to-br from-blue-50 to-indigo-100">
                     <CardHeader className="p-2">

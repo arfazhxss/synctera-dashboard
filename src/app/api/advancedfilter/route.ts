@@ -4,7 +4,6 @@ import { promises as fs } from 'fs';
 import { applyFilters } from '@/app/api/advancedfilter/filter';
 import { Transaction } from '@/types';
 
-// Load transactions data
 async function getTransactions(): Promise<Transaction[]> {
     const filePath = path.join(process.cwd(), 'src', 'data', 'transactions.json');
     const fileContents = await fs.readFile(filePath, 'utf-8');

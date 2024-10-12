@@ -79,3 +79,7 @@ body {
   }
 }
 
+.scale-75 {
+  transform: scale(0.75);
+  transform-origin: top left;
+}

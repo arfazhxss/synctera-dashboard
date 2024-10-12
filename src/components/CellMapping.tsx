@@ -3,7 +3,7 @@ import { Transaction } from '@/types';
 const formatTransactionDate = (dateStr: string | number | Date) => {
     const date = new Date(dateStr);
     const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
     return `${month}/${day}`;
 };
 
@@ -19,7 +19,7 @@ export const cellMappings: {
         date: (transaction) => {
             const date = new Date(transaction.transactionDate);
             const day = String(date.getDate()).padStart(2, '0');
-            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+            const month = String(date.getMonth() + 1).padStart(2, '0');
             const year = date.getFullYear();
 
             return `${day}/${month}/${year}`;
@@ -34,7 +34,7 @@ export const cellMappings: {
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                 }}
-                title={transaction.description}  // Optionally, show the full description on hover
+                title={transaction.description}
             >
                 {transaction.description}
             </span>
@@ -118,7 +118,7 @@ export const cellMappings: {
         date: (transaction) => {
             const date = new Date(transaction.transactionDate);
             const day = String(date.getDate()).padStart(2, '0');
-            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+            const month = String(date.getMonth() + 1).padStart(2, '0');
             const year = date.getFullYear();
 
             return `${day}/${month}/${year}`;

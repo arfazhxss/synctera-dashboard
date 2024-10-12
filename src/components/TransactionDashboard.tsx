@@ -67,7 +67,7 @@ export default function Dashboard() {
     const currentHeaders = getHeaderMappings(filter);
 
     return (
-        <div className="flex flex-col xl:flex-row lg:space-x-6">
+        <div className="flex flex-col w-full xl:flex-row lg:space-x-6">
             <div className="w-full mb-4 lg:mb-0">
                 <TransactionTable
                     selectedTransaction={selectedTransaction}
