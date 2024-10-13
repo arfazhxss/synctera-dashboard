@@ -13,10 +13,11 @@ https://github.com/user-attachments/assets/abc7ac64-f515-4c9e-96df-20522fe94cec
 ### Task 2 ✅
 - [x] Implemented advanced filters API endpoint (`/api/advancedfilter`)  
 - [x] Added dropdown filters for:
-  - [x] Top 10 merchants
-  - [x] Top 10 by amount
-  - [x] Top categories by amount  
-- [x] Created `FilterSelect` component for filter UI 
+  - [x] All Transactions (`/api/transactions?filter=all`)
+  - [x] Top 10 transactions grouped by merchants (`/api/transactions?filter=top-merchants`)  
+  - [x] Top 10 transactions sorted in ascending order by amounts (`/api/transactions?filter=top-amount`)  
+  - [x] Top 10 transactions grouped by catagories  (`/api/advancedfilter=top-catagories`)
+- [x] Created `FilterSelect` component for filter UI
 
 ### Pending Tasks ⏳
 - [ ] Fix Advanced Filter Settings for Marchant View
