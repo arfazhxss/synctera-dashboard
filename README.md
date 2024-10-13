@@ -1,5 +1,7 @@
 # Synctera Front End Challenge - Implementation Overview
 
+https://github.com/user-attachments/assets/abc7ac64-f515-4c9e-96df-20522fe94cec
+
 ## Completed Requirements
 
 ### Task 1 ✅
