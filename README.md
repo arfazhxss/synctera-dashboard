@@ -1,22 +1,27 @@
-# Synctera Front End Challenge - Implementation Overview
+# Synctera FinTech Dashboard
 
 https://github.com/user-attachments/assets/abc7ac64-f515-4c9e-96df-20522fe94cec
 
 ## Completed Requirements
 
 ### Task 1 ✅
-- Implemented transaction table with all data
-- Added loading indicator (LoadingContext & LoadingOverlay components)
-- Created TransactionDetailsDialog for viewing details in a modal
-- Used shadcn/ui components for a professional look
+- [x] Implemented transaction table with all data  
+- [x] Added loading indicator (LoadingContext & LoadingOverlay components)  
+- [x] Created `TransactionDetailsDialog` for viewing details in a modal  
+- [x] Used `shadcn/ui` components for a professional look  
 
 ### Task 2 ✅
-- Implemented advanced filters API endpoint (/api/advancedfilter)
-- Added dropdown filters for:
-  - Top 10 merchants
-  - Top 10 by amount
-  - Top categories by amount
-- Created FilterSelect component for filter UI
+- [x] Implemented advanced filters API endpoint (`/api/advancedfilter`)  
+- [x] Added dropdown filters for:
+  - [x] Top 10 merchants
+  - [x] Top 10 by amount
+  - [x] Top categories by amount  
+- [x] Created `FilterSelect` component for filter UI 
+
+### Pending Tasks ⏳
+- [ ] Fix Advanced Filter Settings for Marchant View
+- [ ] Fix TransactionTable overflow in Mobile View
+- [ ] Map Currency, Country and City Data from Database into Advanced Filter Table
 
 ## Technical Decisions
 
